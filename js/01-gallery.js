@@ -13,19 +13,6 @@ function createImgGallery  (item)  {
         const linkEL = document.createElement("a");
         linkEL.classList.add("gallery__link");
         linkEL.href = item.original;
-        linkEL.addEventListener('click', (evt) => {
-            evt.preventDefault();
-            const instance = basicLightbox.create(`
-            <img src=${item.original} width="800" height="600">`)
-            instance.show();
-            
-            window.addEventListener('keydown', (evt) => {
-                if (evt.code === 'Escape') {
-                    instance.close();
-                } 
-              
-            });
-        });
 
         const imgEl = document.createElement("img");
         imgEl.classList.add("gallery__image");
@@ -44,9 +31,25 @@ function createImgGallery  (item)  {
 const element = createImgGallery(galleryItems);
 takeDivTag.append(...element);
 
+takeDivTag.addEventListener('click', (evt) => {
+    
+    evt.preventDefault();
+    const instance = basicLightbox.create(`
+    <img src=${evt.target.dataset.source} width="800" height="600">`)
+    instance.show();
+            
+
+    window.addEventListener('keydown', (evt) => {
+        
+        if (evt.code === 'Escape') {
+            instance.close(() => window.removeEventListener('keydown', (evt)));
+            console.log(evt.code)
+        } 
+    });
+    
+});
+
 
 console.log(galleryItems);
-
-
 
 
