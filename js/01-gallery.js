@@ -11,17 +11,21 @@ function createImgGallery  (item)  {
         divEl.classList.add("gallery__item");
 
         const linkEL = document.createElement("a");
+        linkEL.classList.add("gallery__link");
+        linkEL.href = item.original;
         linkEL.addEventListener('click', (evt) => {
             evt.preventDefault();
             const instance = basicLightbox.create(`
             <img src=${item.original} width="800" height="600">`)
-            instance.show()
+            instance.show();
+            
+            window.addEventListener('keydown', (evt) => {
+                if (evt.code === 'Escape') {
+                    instance.close();
+                } 
+              
+            });
         });
-        linkEL.classList.add("gallery__link");
-        linkEL.href = item.original;
-
-
-      
 
         const imgEl = document.createElement("img");
         imgEl.classList.add("gallery__image");
@@ -29,25 +33,16 @@ function createImgGallery  (item)  {
         imgEl.dataset.source = item.original;
         imgEl.alt = item.description;
 
-   
-    
         linkEL.appendChild(imgEl);
         divEl.appendChild(linkEL);
         takeDivTag.appendChild(divEl);
 
         return divEl;
     });
-      };
-
+};
 
 const element = createImgGallery(galleryItems);
 takeDivTag.append(...element);
-
-
-takeDivTag.addEventListener('click', () => {
-});
-
-
 
 
 console.log(galleryItems);
