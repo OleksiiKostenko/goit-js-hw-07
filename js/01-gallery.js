@@ -2,7 +2,7 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 
-const takeDivTag = document.querySelector("div.gallery");
+const galleryWrapp = document.querySelector("div.gallery");
 
 function createImgGallery  (item)  {
     return item.map(item => {
@@ -22,16 +22,16 @@ function createImgGallery  (item)  {
 
         linkEL.appendChild(imgEl);
         divEl.appendChild(linkEL);
-        takeDivTag.appendChild(divEl);
+        galleryWrapp.appendChild(divEl);
 
         return divEl;
     });
 };
 
 const element = createImgGallery(galleryItems);
-takeDivTag.append(...element);
+galleryWrapp.append(...element);
 
-takeDivTag.addEventListener('click', (evt) => {
+galleryWrapp.addEventListener('click', (evt) => {
     
     evt.preventDefault();
     const instance = basicLightbox.create(`
