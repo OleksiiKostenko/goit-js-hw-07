@@ -1,6 +1,7 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-// const takeDivTag = document.querySelector("div.gallery");
+
+
 
 function createImgGallery  (item)  {
     return item.map(item => {
@@ -15,17 +16,21 @@ function createImgGallery  (item)  {
         imgEl.alt = item.description;
 
         linkEL.appendChild(imgEl);
-        divEl.appendChild(linkEL);
-        takeDivTag.appendChild(divEl);
-
-        return divEl;
+        return linkEL;
     });
 };
 
+const galleryWrapp = document.querySelector(".gallery");
 const element = createImgGallery(galleryItems);
-takeDivTag.append(...element);
+galleryWrapp.append(...element);
 
 
-
-
-console.log(galleryItems);
+galleryWrapp.addEventListener('click', (event) => {
+    event.preventDefault();
+})
+const lightbox = new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionDelay: 250,
+    captionSelector: 'img',
+    captionType: 'attr',
+    captionsData: 'alt', });
