@@ -1,8 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-
-
 function createImgGallery  (item)  {
     return item.map(item => {
 
@@ -23,7 +21,6 @@ function createImgGallery  (item)  {
 const galleryWrapp = document.querySelector(".gallery");
 const element = createImgGallery(galleryItems);
 galleryWrapp.append(...element);
-
 
 galleryWrapp.addEventListener('click', (event) => {
     event.preventDefault();

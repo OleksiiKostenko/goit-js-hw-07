@@ -1,7 +1,5 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-
-
 const galleryWrapp = document.querySelector("div.gallery");
 
 function createImgGallery  (item)  {
@@ -38,18 +36,16 @@ galleryWrapp.addEventListener('click', (evt) => {
     <img src=${evt.target.dataset.source} width="800" height="600">`)
     instance.show();
             
+    window.addEventListener('keydown', onCloseModal);
 
-    window.addEventListener('keydown', (evt) => {
-        
+    function onCloseModal (evt){
         if (evt.code === 'Escape') {
-            instance.close(() => window.removeEventListener('keydown', (evt)));
+            instance.close();
             console.log(evt.code)
+            window.removeEventListener('keydown', onCloseModal);
         } 
-    });
-    
+    };
 });
-
-
 console.log(galleryItems);
 
 
